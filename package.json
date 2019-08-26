@@ -10,7 +10,7 @@
     "build": "ng build --prod",
     "e2e": "ng e2e",
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod"
+    "postinstall": "ng build --aot -prod"
   },
   "keywords": [],
   "author": "",
