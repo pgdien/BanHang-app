@@ -4,7 +4,6 @@
   "private": true,
   "description": "Example project from an angular.io guide.",
   "scripts": {
-    "lint": "tslint ./src/**/*.ts -t verbose",
     "start": "node server.js",
     "test": "ng test",
     "build": "ng build --prod",
