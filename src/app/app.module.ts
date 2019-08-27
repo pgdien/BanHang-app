@@ -48,6 +48,9 @@ import {MatTreeModule} from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
+import { DMHangHoaComponent } from './DanhMucHangHoa/dmHangHoa.component';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -97,7 +100,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DMHangHoaComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
