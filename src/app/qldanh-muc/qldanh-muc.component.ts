@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import {HttpClient} from '@angular/common/http';
 
 export interface PeriodicElement {
   name: string;
@@ -26,10 +28,61 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class QLDanhMucComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumnHangHoa: string[] = ['mA_HH', 'teN_HH'];
+  displayedColumnLoaiDonhang: string[] = ['teN_LDH'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  host='https://banhang-api.herokuapp.com';
+  // host='http://localhost:61994';
+  themDonHang=false;
+  listDonHang = null;
+  themHangHoa=false;
+  listHangHoa = null;
+  themLoaiDonhang=false;
+  listLoaiDonHang = null;
 
   ngOnInit() {
+    this.httpClient.get(this.host + '/api/hanghoa').subscribe((data) => {
+      this.listHangHoa = data;
+      //console.log(this.listNguoiQL);
+    });
+    this.httpClient.get(this.host + '/api/loai_donhang').subscribe((data) => {
+      this.listLoaiDonHang = data;
+      //console.log(this.listNguoiQL);
+    });
   }
 
+  
+  changeDonHang() {
+    if(this.themDonHang)
+      this.themDonHang=false;
+    else
+      this.themDonHang=true;
+    // console.log(this.themDonHang);
+  }
+  changeHangHoa() {
+    if(this.themHangHoa)
+      this.themHangHoa=false;
+    else
+      this.themHangHoa=true;
+    // console.log(this.themHangHoa);
+  }
+  changeLoaiDonHang() {
+    if(this.themLoaiDonhang)
+      this.themLoaiDonhang=false;
+    else
+      this.themLoaiDonhang=true;
+    // console.log(this.themLoaiDonhang);
+  }
+
+  addDonHang() {
+    
+  }
+  addHangHoa() {
+    
+  }
+  addLoaiDonHang() {
+    
+  }
 }

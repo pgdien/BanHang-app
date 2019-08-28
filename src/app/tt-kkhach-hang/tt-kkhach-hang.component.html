@@ -1,12 +1,45 @@
 <div class="example-container">
-    <mat-form-field>
+    <mat-slide-toggle [checked]="themKhachHang" (change)="changeKhachHang()">Thêm mới</mat-slide-toggle>
+    <mat-form-field *ngIf="themKhachHang">
         <input matInput placeholder="Tên khách hàng">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field *ngIf="themKhachHang">
         <input matInput placeholder="Số ĐT">
     </mat-form-field>
-    
-    <mat-form-field>
+    <mat-form-field *ngIf="themKhachHang">
         <textarea matInput placeholder="Ghi chú"></textarea>
     </mat-form-field>
+    <button mat-flat-button color="primary" *ngIf="themKhachHang" (click)="addKhachHang()">Thêm</button>
 </div>
+<table mat-table [dataSource]="listKhachHang" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+    <!-- Position Column -->
+    <ng-container matColumnDef="mA_KH">
+        <th mat-header-cell *matHeaderCellDef> mã KH </th>
+        <td mat-cell *matCellDef="let element"> {{element.mA_KH}} </td>
+    </ng-container>
+    
+    <!-- Name Column -->
+    <ng-container matColumnDef="teN_KH">
+        <th mat-header-cell *matHeaderCellDef> Tên </th>
+        <td mat-cell *matCellDef="let element"> {{element.teN_KH}} </td>
+    </ng-container>
+    
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sdt">
+        <th mat-header-cell *matHeaderCellDef> Số ĐT </th>
+        <td mat-cell *matCellDef="let element"> {{element.sdt}} </td>
+    </ng-container>
+    
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="ghichu">
+        <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+        <td mat-cell *matCellDef="let element"> {{element.ghichu}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
