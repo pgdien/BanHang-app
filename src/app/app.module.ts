@@ -54,6 +54,8 @@ import { QLDanhMucComponent } from './qldanh-muc/qldanh-muc.component';
 import { TtKKhachHangComponent } from './tt-kkhach-hang/tt-kkhach-hang.component';
 import { QlNhapHangComponent } from './ql-nhap-hang/ql-nhap-hang.component';
 import { QlBanHangComponent } from './ql-ban-hang/ql-ban-hang.component';
+import { logging } from 'protractor';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
     HomeComponent,
     TtKKhachHangComponent,
     QlNhapHangComponent,
-    QlBanHangComponent
+    QlBanHangComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(

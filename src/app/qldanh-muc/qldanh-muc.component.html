@@ -1,4 +1,45 @@
 <mat-tab-group>
+    <mat-tab label="Đơn hàng">
+        <div class="example-container">
+            <mat-slide-toggle [checked]="themDonHang" (change)="changeDonHang()">Thêm mới</mat-slide-toggle>
+            <mat-form-field *ngIf="themDonHang">
+                <input matInput placeholder="Tên Đơn hàng">
+            </mat-form-field>
+            <button mat-flat-button color="primary" *ngIf="themDonHang" (click)="addDonHang()">Thêm</button>
+        </div>
+        <mat-accordion *ngFor="let item of listDonHang">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon *ngIf="item.ttdH_ID!=1">done</mat-icon> ({{item.stt}}) {{item.mA_DH}} 
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{item.ngaY_LAP | date: 'dd/MM/yyyy'}} 
+                </mat-panel-description>
+                </mat-expansion-panel-header>
+            
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *ngIf="item.khachhanG_ID==0">
+                        Không có thông tin khách hàng
+                    </mat-list-item>
+                    <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
+                        {{item.khachhang.mA_KH}} - {{item.khachhang.teN_KH}}
+                    </mat-list-item>
+                    <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
+                        {{item.khachhang.sdt}}
+                    </mat-list-item>
+                    <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
+                        {{item.loaiDH.teN_LDH}}
+                    </mat-list-item>
+                    <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
+                        <button mat-stroked-button>Thêm</button>
+                        <button mat-stroked-button color="primary">Sửa</button>
+                        <button mat-stroked-button color="warn">Xóa</button>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-tab>
     <mat-tab label="Hàng hóa">
         <div class="example-container">
             <mat-slide-toggle [checked]="themHangHoa" (change)="changeHangHoa()">Thêm mới</mat-slide-toggle>

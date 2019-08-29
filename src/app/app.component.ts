@@ -8,7 +8,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 })
 export class AppComponent {
   title = 'banhang-app';
-
+  static login='abc';
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;

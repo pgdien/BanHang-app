@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import {HttpClient} from '@angular/common/http';
+import { AppComponent } from '../app.component';
 
 export interface PeriodicElement {
   name: string;
@@ -31,10 +32,11 @@ export class QLDanhMucComponent implements OnInit {
   displayedColumnHangHoa: string[] = ['mA_HH', 'teN_HH'];
   displayedColumnLoaiDonhang: string[] = ['teN_LDH'];
   dataSource = ELEMENT_DATA;
+  panelOpenState = false;
   constructor(private httpClient: HttpClient) { }
 
   host='https://banhang-api.herokuapp.com';
-  // host='http://localhost:61994';
+  // host='http://localhost:50479';
   themDonHang=false;
   listDonHang = null;
   themHangHoa=false;
@@ -43,6 +45,18 @@ export class QLDanhMucComponent implements OnInit {
   listLoaiDonHang = null;
 
   ngOnInit() {
+    this.httpClient.get(this.host + '/api/donhang').subscribe((data) => {
+      this.listDonHang = data;
+      this.listDonHang.forEach(childObj=> {
+        this.httpClient.get(this.host + '/api/khachhang/'+childObj.khachhanG_ID).subscribe((data1) => {
+          childObj.khachhang = data1;
+        });
+        this.httpClient.get(this.host + '/api/loai_donhang/'+childObj.loaidH_ID).subscribe((data2) => {
+          childObj.loaiDH = data2;
+        });
+     })
+      console.log(this.listDonHang);
+    });
     this.httpClient.get(this.host + '/api/hanghoa').subscribe((data) => {
       this.listHangHoa = data;
       //console.log(this.listNguoiQL);
@@ -50,6 +64,7 @@ export class QLDanhMucComponent implements OnInit {
     this.httpClient.get(this.host + '/api/loai_donhang').subscribe((data) => {
       this.listLoaiDonHang = data;
       //console.log(this.listNguoiQL);
+      // console.log(AppComponent.login);
     });
   }
 
