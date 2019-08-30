@@ -56,6 +56,7 @@ import { QlNhapHangComponent } from './ql-nhap-hang/ql-nhap-hang.component';
 import { QlBanHangComponent } from './ql-ban-hang/ql-ban-hang.component';
 import { logging } from 'protractor';
 import { LoginComponent } from './login/login.component';
+import {FormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     // QLDanhMucModule,
 
     CdkStepperModule,
