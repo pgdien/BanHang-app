@@ -58,6 +58,8 @@ import { logging } from 'protractor';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
 
+import { ModalComponent } from './_components';
+
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'QLDanhMuc', component: QLDanhMucComponent },
@@ -74,7 +76,8 @@ const appRoutes: Routes = [
     TtKKhachHangComponent,
     QlNhapHangComponent,
     QlBanHangComponent,
-    LoginComponent
+    LoginComponent,
+    ModalComponent
   ],
   imports: [
     RouterModule.forRoot(

@@ -1,6 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 
+import './_content/app.less';
+import './_content/modal.less';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

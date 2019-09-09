@@ -1,14 +1,8 @@
 <mat-tab-group>
     <mat-tab label="Hàng hóa">
-        <div class="example-container">
-            <mat-slide-toggle [checked]="themHangHoa" (change)="changeHangHoa()">{{stt}}</mat-slide-toggle>
-            <mat-form-field *ngIf="themHangHoa">
-                <input matInput placeholder="Tên hàng hóa" [(ngModel)]="txtTenHH">
-            </mat-form-field>
-            <button mat-flat-button color="primary" *ngIf="themHangHoa && stt=='Thêm'" (click)="addHangHoa()">{{stt}}</button>
-            <button mat-flat-button color="primary" *ngIf="themHangHoa && stt=='Sửa'" (click)="editHangHoa()">{{stt}}</button>
-            {{kq}}
-        </div>
+        <button mat-raised-button color="primary" (click)="openModal('modal-add-edit-HangHoa');createAdd()"> 
+            <i class="material-icons">add</i> Thêm
+        </button>
         <table mat-table [dataSource]="listHangHoa" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
@@ -29,10 +23,10 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
                     <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-                        <i class="material-icons" (click)="createedit(element.hanghoA_ID)">edit</i>
+                        <i class="material-icons" (click)="openModal('modal-add-edit-HangHoa');createEdit(element.hanghoA_ID)">edit</i>
                     </button>
                     <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-                        <i class="material-icons" (click)=delHangHoa(element.hanghoA_ID)>delete_forever</i>
+                        <i class="material-icons" (click)="openModal('modal-del-HangHoa');createDel(element.hanghoA_ID,element.teN_HH)">delete_forever</i>
                     </button>
                 </td>
             </ng-container>
@@ -65,3 +59,21 @@
         </table>
     </mat-tab>
 </mat-tab-group>
+    
+<jw-modal id="modal-add-edit-HangHoa">
+    <h1>{{stt}} hàng hóa!</h1>
+    <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+    <mat-form-field>
+        <input matInput placeholder="Tên hàng hóa" [(ngModel)]="txtTenHH">
+    </mat-form-field>
+    <button mat-flat-button color="primary" *ngIf="stt=='Thêm'" (click)="closeModal('modal-add-edit-HangHoa');addHangHoa()">{{stt}}</button>
+    <button mat-flat-button color="primary" *ngIf="stt=='Sửa'" (click)="closeModal('modal-add-edit-HangHoa');editHangHoa()">{{stt}}</button>
+</jw-modal>
+
+<jw-modal id="modal-del-HangHoa">
+    <h1>Xóa {{txtTenHH}}?</h1>
+    <button mat-flat-button color="primary" (click)="closeModal('modal-del-HangHoa')">Không đồng ý</button>
+    <button mat-flat-button color="warn" (click)="closeModal('modal-del-HangHoa');delHangHoa()" style="margin-left: 5em">Đồng ý</button>
+</jw-modal>
+
+<div><mat-progress-bar mode="indeterminate" *ngIf="load"></mat-progress-bar></div>
