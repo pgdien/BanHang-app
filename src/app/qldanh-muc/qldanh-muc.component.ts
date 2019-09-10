@@ -82,6 +82,7 @@ export class QLDanhMucComponent implements OnInit {
   createAdd(){
     this.idHangHoa=null;
     this.txtTenHH=null;
+    this.stt='Thêm';
   }
   addHangHoa() {
       this.httpClient.post(this.host + '/api/hanghoa', JSON.parse('{"ma_hh":"'+'1'+'",'+
