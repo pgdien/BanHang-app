@@ -1,10 +1,9 @@
 <div class="example-container">
-    <mat-slide-toggle [checked]="themDonHang" (change)="changeDonHang()">Thêm mới</mat-slide-toggle>
-    <mat-form-field *ngIf="themDonHang">
-        <input matInput placeholder="Tên Đơn hàng">
-    </mat-form-field>
-    <button mat-flat-button color="primary" *ngIf="themDonHang" (click)="addDonHang()">Thêm</button>
+    <button mat-raised-button color="primary" (click)="openModal('modal-add-edit-DonHang');createAddDonHang()"> 
+        <i class="material-icons">add</i> Thêm đơn hàng
+    </button>
 </div>
+<div><mat-progress-bar mode="indeterminate" *ngIf="load"></mat-progress-bar></div>
 <mat-accordion *ngFor="let item of listDonHang">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -14,26 +13,54 @@
         <mat-panel-description>
             {{item.ngaY_LAP | date: 'dd/MM/yyyy'}} 
         </mat-panel-description>
+        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)">
+            <i class="material-icons">delete</i>
+        </button>
         </mat-expansion-panel-header>
     
         <mat-list role="list">
             <mat-list-item role="listitem" *ngIf="item.khachhanG_ID==0">
                 Không có thông tin khách hàng
+                <button mat-icon-button aria-label="Example icon-button with a heart icon">
+                    <i class="material-icons">add</i>
+                </button>
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
-                {{item.khachhang.mA_KH}} - {{item.khachhang.teN_KH}}
+                {{item.khachhang.mA_KH}} - {{item.khachhang.teN_KH}} 
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
                 {{item.khachhang.sdt}}
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
-                {{item.loaiDH.teN_LDH}}
+                Chi tiết đơn hàng
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
-                <button mat-stroked-button>Thêm</button>
-                <button mat-stroked-button color="primary">Sửa</button>
-                <button mat-stroked-button color="warn">Xóa</button>
+                <button mat-icon-button aria-label="Example icon-button with a heart icon">
+                    <i class="material-icons">add</i>
+                </button>
+                <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
+                    <i class="material-icons">edit</i>
+                </button>
+                <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                    <i class="material-icons">delete</i>
+                </button>
             </mat-list-item>
         </mat-list>
     </mat-expansion-panel>
 </mat-accordion>
+
+<jw-modal id="modal-add-edit-DonHang">
+    <h1>{{stt}}!</h1>
+    <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+    <mat-form-field>
+        <input matInput placeholder="Ghi chú" [(ngModel)]="txtGhiChu_DonHang">
+    </mat-form-field>
+    <button mat-flat-button color="primary" *ngIf="stt=='Thêm đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');addDonHang()">{{stt}}</button>
+    <!-- <button mat-flat-button color="primary" *ngIf="stt=='Sửa đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');editHangHoa()">{{stt}}</button> -->
+</jw-modal>
+
+<jw-modal id="modal-del-DonHang">
+    <h1>Xóa {{txtMaDonHang}}?</h1>
+    <button mat-flat-button color="primary" (click)="closeModal('modal-del-DonHang')">Không đồng ý</button>
+    <button mat-flat-button color="warn" (click)="closeModal('modal-del-DonHang');delDonHang()" style="margin-left: 5em">Đồng ý</button>
+</jw-modal>

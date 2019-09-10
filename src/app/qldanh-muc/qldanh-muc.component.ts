@@ -57,32 +57,30 @@ export class QLDanhMucComponent implements OnInit {
   }
   loadData(){
     this.load=true;
-    this.listHangHoa=null;
+    // this.listHangHoa=null;
     this.httpClient.get(this.host + '/api/hanghoa').subscribe((data) => {
       this.listHangHoa = data;
       this.load=false;
       // console.log(this.listHangHoa);
     });
   }
-  
-  changeHangHoa() {
-    if(this.themHangHoa)
-      this.themHangHoa=false;
-    else
-      this.themHangHoa=true;
-    // console.log(this.themHangHoa);
-  }
-  changeLoaiDonHang() {
-    if(this.themLoaiDonhang)
-      this.themLoaiDonhang=false;
-    else
-      this.themLoaiDonhang=true;
-    // console.log(this.themLoaiDonhang);
-  }
   createAdd(){
     this.idHangHoa=null;
     this.txtTenHH=null;
     this.stt='Thêm';
+  }
+  createEdit(id){
+    this.stt='Sửa';
+    this.idHangHoa=id;
+    this.listHangHoa.forEach(childObj=> {
+      if(childObj.hanghoA_ID == id){
+        this.txtTenHH=childObj.teN_HH;
+      }
+    })
+  }
+  createDel(id, ten){
+    this.idHangHoa=id;
+    this.txtTenHH=ten;
   }
   addHangHoa() {
       this.httpClient.post(this.host + '/api/hanghoa', JSON.parse('{"ma_hh":"'+'1'+'",'+
@@ -103,10 +101,6 @@ export class QLDanhMucComponent implements OnInit {
       if(data=='Thành công'){this.loadData();}
     });
   }
-  createDel(id, ten){
-    this.idHangHoa=id;
-    this.txtTenHH=ten;
-  }
   delHangHoa(){
     this.httpClient.delete(this.host + '/api/hanghoa/'+this.idHangHoa,  {responseType: 'text'}).subscribe(
     data => {
@@ -116,19 +110,7 @@ export class QLDanhMucComponent implements OnInit {
       if(data=='Thành công'){this.loadData();}
     });
   }
-  addLoaiDonHang() {
-    
-  }
-  createEdit(id){
-    this.stt='Sửa';
-    this.idHangHoa=id;
-    this.listHangHoa.forEach(childObj=> {
-      if(childObj.hanghoA_ID == id){
-        this.txtTenHH=childObj.teN_HH;
-      }
-    })
-    this.changeHangHoa();
-  }
+  
   openSnackBar() {
     let config = new MatSnackBarConfig();
     config.verticalPosition = this.verticalPosition;

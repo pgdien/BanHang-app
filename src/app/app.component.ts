@@ -21,4 +21,8 @@ export class AppComponent {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
+  ngOnInit() {
+    this.title = document.title
+    console.log(this.title)
+  }
 }
