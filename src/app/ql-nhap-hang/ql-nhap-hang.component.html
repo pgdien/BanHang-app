@@ -50,14 +50,20 @@
     </mat-accordion>
     
     <jw-modal id="modal-add-edit-DonHang">
-        <h1>{{stt}}!</h1>
-        <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
-        <mat-form-field>
-            <input matInput placeholder="Ghi chú" [(ngModel)]="txtGhiChu_DonHang">
-        </mat-form-field>
-        <button mat-flat-button color="primary" *ngIf="stt=='Thêm đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');addDonHang()">{{stt}}</button>
-        <!-- <button mat-flat-button color="primary" *ngIf="stt=='Sửa đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');editHangHoa()">{{stt}}</button> -->
-    </jw-modal>
+            <h1>{{stt}}!</h1>
+            <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+            <mat-form-field>
+                <mat-label>Khách hàng</mat-label>
+                <select matNativeControl [(ngModel)]="idKhachHang">
+                    <option *ngFor="let item of listKhachHang" [(ngValue)]="item.khachhanG_ID">{{item.mA_KH}} - {{item.teN_KH}}</option>
+                </select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Ghi chú" [(ngModel)]="txtGhiChu_DonHang">
+            </mat-form-field>
+            <button mat-flat-button color="primary" *ngIf="stt=='Thêm đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');addDonHang()">{{stt}}</button>
+            <!-- <button mat-flat-button color="primary" *ngIf="stt=='Sửa đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');editHangHoa()">{{stt}}</button> -->
+        </jw-modal>
     
     <jw-modal id="modal-del-DonHang">
         <h1>Xóa {{txtMaDonHang}}?</h1>

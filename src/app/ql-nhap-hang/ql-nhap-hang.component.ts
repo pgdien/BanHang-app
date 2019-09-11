@@ -21,6 +21,9 @@ export class QlNhapHangComponent implements OnInit {
   txtGhiChu_DonHang=null;
   txtMaDonHang=null;
   stt='Thêm đơn hàng'
+
+  listKhachHang=null;
+  idKhachHang=null;
   kq=null;
   load=false;
 
@@ -39,6 +42,10 @@ export class QlNhapHangComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.httpClient.get(this.host + '/api/khachhang').subscribe((data) => {
+      this.listKhachHang = data;
+      // console.log(data);
+    });
   }
 
   loadData(){
@@ -82,9 +89,9 @@ export class QlNhapHangComponent implements OnInit {
   }
   addDonHang() {
     this.now = new Date();
-    this.httpClient.post(this.host + '/api/donhang', JSON.parse('{"khachhang_id":"'+'1'+'",'+
+    this.httpClient.post(this.host + '/api/donhang', JSON.parse('{"khachhang_id":"'+this.idKhachHang+'",'+
                                                             '"ngay_lap":"'+formatDate(new Date(), 'MM/dd/yyyy', 'en')+'",'+
-                                                            '"loaidh_id":"'+'2'+'",'+
+                                                            '"loaidh_id":"'+'1'+'",'+
                                                             '"ttdh_id":"'+'1'+'",'+
                                                             '"ma_dh":"'+'10'+'",'+
                                                             '"stt":"'+'10'+'",'+

@@ -21,6 +21,9 @@ export class QlBanHangComponent implements OnInit {
   txtGhiChu_DonHang=null;
   txtMaDonHang=null;
   stt='Thêm đơn hàng'
+
+  listKhachHang=null;
+  idKhachHang=null;
   kq=null;
   load=false;
 
@@ -31,12 +34,15 @@ export class QlBanHangComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  public now: Date = new Date();
 
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private modalService: ModalService) { }
 
   ngOnInit() {
     this.loadData();
+    this.httpClient.get(this.host + '/api/khachhang').subscribe((data) => {
+      this.listKhachHang = data;
+      // console.log(data);
+    });
   }
 
   loadData(){
@@ -79,8 +85,8 @@ export class QlBanHangComponent implements OnInit {
     this.txtMaDonHang=ten;
   }
   addDonHang() {
-    this.now = new Date();
-    this.httpClient.post(this.host + '/api/donhang', JSON.parse('{"khachhang_id":"'+'1'+'",'+
+    console.log(this.idKhachHang);
+    this.httpClient.post(this.host + '/api/donhang', JSON.parse('{"khachhang_id":"'+this.idKhachHang+'",'+
                                                             '"ngay_lap":"'+formatDate(new Date(), 'MM/dd/yyyy', 'en')+'",'+
                                                             '"loaidh_id":"'+'2'+'",'+
                                                             '"ttdh_id":"'+'1'+'",'+
