@@ -11,8 +11,8 @@ import {formatDate} from '@angular/common';
 })
 
 export class QlBanHangComponent implements OnInit {
-  // host='https://banhang-api.herokuapp.com';
-  host='https://localhost:44332';
+  host='https://banhang-api.herokuapp.com';
+  // host='https://localhost:44332';
   
   themDonHang=false;
   listDonHang = null;
@@ -41,7 +41,7 @@ export class QlBanHangComponent implements OnInit {
 
   loadData(){
     this.load=true;
-    this.httpClient.get(this.host + '/api/donhang').subscribe((data) => {
+    this.httpClient.get(this.host + '/api/donhang/ban').subscribe((data) => {
       this.listDonHang = data;
       this.listDonHang.forEach(childObj=> {
         this.httpClient.get(this.host + '/api/khachhang/'+childObj.khachhanG_ID).subscribe((data1) => {

@@ -11,8 +11,8 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./ql-nhap-hang.component.css']
 })
 export class QlNhapHangComponent implements OnInit {
-  // host='https://banhang-api.herokuapp.com';
-  host='https://localhost:44332';
+  host='https://banhang-api.herokuapp.com';
+  // host='https://localhost:44332';
     
   themDonHang=false;
   listDonHang = null;
@@ -43,7 +43,7 @@ export class QlNhapHangComponent implements OnInit {
 
   loadData(){
     this.load=true;
-    this.httpClient.get(this.host + '/api/donhang').subscribe((data) => {
+    this.httpClient.get(this.host + '/api/donhang/nhap').subscribe((data) => {
       this.listDonHang = data;
       this.listDonHang.forEach(childObj=> {
         this.httpClient.get(this.host + '/api/khachhang/'+childObj.khachhanG_ID).subscribe((data1) => {
