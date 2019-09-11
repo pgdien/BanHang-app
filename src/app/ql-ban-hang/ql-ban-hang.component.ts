@@ -41,7 +41,7 @@ export class QlBanHangComponent implements OnInit {
 
   loadData(){
     this.load=true;
-    this.httpClient.get(this.host + '/api/donhang/ban').subscribe((data) => {
+    this.httpClient.get(this.host + '/api/donhang/xuat').subscribe((data) => {
       this.listDonHang = data;
       this.listDonHang.forEach(childObj=> {
         this.httpClient.get(this.host + '/api/khachhang/'+childObj.khachhanG_ID).subscribe((data1) => {
