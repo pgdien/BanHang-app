@@ -93,3 +93,18 @@ body.jw-modal-open {
 
   overflow: hidden;
 }
+
+
+.evtSwipeButton{
+  width: 20%;
+  float: right;
+  visibility: hidden;
+}
+.evtSwipeButtonL{
+  visibility: visible !important;
+  position: absolute;
+  overflow: hidden;
+  z-index: 100;
+  right: 4%;
+  margin-top: -3%;    
+}

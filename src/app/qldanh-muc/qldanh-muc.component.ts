@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import {HttpClient} from '@angular/common/http';
 import { AppComponent } from '../app.component';
 import {MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
-import {FormsModule} from '@angular/forms';
 import { ModalService } from '../_services';
+import { FormControl } from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 export interface PeriodicElement {
   name: string;
@@ -20,9 +21,11 @@ export interface PeriodicElement {
 })
 export class QLDanhMucComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumnHangHoa: string[] = ['mA_HH', 'teN_HH', 'xx'];
+  displayedColumnHangHoa: string[] = ['mA_HH', 'teN_HH', 'hanghoA_ID'];
+  // displayedColumnHangHoa: string[] = ['mA_HH', 'teN_HH'];
   displayedColumnLoaiDonhang: string[] = ['teN_LDH'];
   panelOpenState = false;
+
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private modalService: ModalService) { }
 
   host='https://banhang-api.herokuapp.com';
@@ -36,6 +39,11 @@ export class QLDanhMucComponent implements OnInit {
   txtTenHH=null;
   kq=null;
   load=false;
+  evtSwipe=null;
+  
+  myControl = new FormControl();
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
 
   actionButtonLabel: string = 'Đóng';
   action: boolean = true;
@@ -47,6 +55,13 @@ export class QLDanhMucComponent implements OnInit {
   addExtraClass: boolean = false;
 
   ngOnInit() {
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+            
+    
     this.loadData();
     
     this.httpClient.get(this.host + '/api/loai_donhang').subscribe((data) => {
@@ -55,13 +70,18 @@ export class QLDanhMucComponent implements OnInit {
       // console.log(AppComponent.login);
     });
   }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+ 
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
   loadData(){
     this.load=true;
     // this.listHangHoa=null;
     this.httpClient.get(this.host + '/api/hanghoa').subscribe((data) => {
       this.listHangHoa = data;
       this.load=false;
-      // console.log(this.listHangHoa);
+      console.log(this.listHangHoa);
     });
   }
   createAdd(){
@@ -109,6 +129,15 @@ export class QLDanhMucComponent implements OnInit {
       this.openSnackBar();
       if(data=='Thành công'){this.loadData();}
     });
+  }
+
+  onSwipe(evt, id) {
+    const x = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
+
+    console.log(`${x} ${y} | ${id}`);
+    this.evtSwipe=x;
+    this.idHangHoa=id;
   }
   
   openSnackBar() {

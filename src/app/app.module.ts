@@ -56,9 +56,11 @@ import { QlNhapHangComponent } from './ql-nhap-hang/ql-nhap-hang.component';
 import { QlBanHangComponent } from './ql-ban-hang/ql-ban-hang.component';
 import { logging } from 'protractor';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 
 import { ModalComponent } from './_components';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -67,6 +69,12 @@ const appRoutes: Routes = [
   { path: 'QLNhapHang', component: QlNhapHangComponent },
   { path: 'QLBanHang', component: QlBanHangComponent }
 ];
+
+export class MyHammerConfig extends HammerGestureConfig  {
+  overrides = <any>{
+    'swipe': {velocity: 0.4, threshold: 20} // override default settings
+  }
+}
 
 @NgModule({
   declarations: [
@@ -89,6 +97,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     // QLDanhMucModule,
 
     CdkStepperModule,
@@ -96,6 +105,7 @@ const appRoutes: Routes = [
     CdkTreeModule,
     DragDropModule,
     MatAutocompleteModule,
+    MatFormFieldModule,
     MatBadgeModule,
     MatBottomSheetModule,
     MatButtonModule,
@@ -133,7 +143,10 @@ const appRoutes: Routes = [
     PortalModule,
     ScrollingModule,
   ],
-  providers: [],
+  providers: [{ 
+    provide: HAMMER_GESTURE_CONFIG, 
+    useClass: MyHammerConfig 
+  }], // use our custom hammerjs config,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

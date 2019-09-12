@@ -27,6 +27,8 @@ export class QlBanHangComponent implements OnInit {
   kq=null;
   load=false;
 
+  evtSwipe=null;
+
   actionButtonLabel: string = 'Đóng';
   action: boolean = true;
   setAutoHide: boolean = true;
@@ -109,6 +111,14 @@ export class QlBanHangComponent implements OnInit {
       });
   }
 
+  onSwipe(evt, id) {
+    const x = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
+
+    // console.log(`${x} ${y} | ${id}`);
+    this.evtSwipe=x;
+    this.idDonhang=id;
+  }
 
   openSnackBar() {
     let config = new MatSnackBarConfig();
