@@ -21,6 +21,7 @@ export class QlNhapHangComponent implements OnInit {
   txtGhiChu_DonHang=null;
   txtMaDonHang=null;
   stt='Thêm đơn hàng'
+  evtSwipe=null;
 
   listKhachHang=null;
   idKhachHang=null;
@@ -112,6 +113,16 @@ export class QlNhapHangComponent implements OnInit {
       });
   }
 
+  
+
+  onSwipe(evt, id) {
+    const x = Math.abs(evt.deltaX) > 40 ? (evt.deltaX > 0 ? 'right' : 'left'):'';
+    const y = Math.abs(evt.deltaY) > 40 ? (evt.deltaY > 0 ? 'down' : 'up') : '';
+
+    // console.log(`${x} ${y} | ${id}`);
+    this.evtSwipe=x;
+    this.idDonhang=id;
+  }
 
   openSnackBar() {
     let config = new MatSnackBarConfig();

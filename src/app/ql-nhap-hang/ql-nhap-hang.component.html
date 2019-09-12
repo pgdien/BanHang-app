@@ -6,16 +6,18 @@
     <div><mat-progress-bar mode="indeterminate" *ngIf="load"></mat-progress-bar></div>
     <mat-accordion *ngFor="let item of listDonHang">
         <mat-expansion-panel>
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header (swipe)="onSwipe($event, item.donhanG_ID)">
             <mat-panel-title>
                 <mat-icon *ngIf="item.ttdH_ID!=1">done</mat-icon> ({{item.stt}}) {{item.mA_DH}} 
             </mat-panel-title>
             <mat-panel-description>
                 {{item.ngaY_LAP | date: 'dd/MM/yyyy'}} 
             </mat-panel-description>
-            <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)">
-                <i class="material-icons">delete</i>
-            </button>
+            <div *ngIf="evtSwipe=='left' && idDonhang==item.donhanG_ID" class="evtSwipeButtonL">
+                <button mat-mini-fab color="warn" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)">
+                    <i class="material-icons">delete</i>
+                </button>
+            </div>
             </mat-expansion-panel-header>
         
             <mat-list role="list">
