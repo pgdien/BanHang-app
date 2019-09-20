@@ -54,6 +54,10 @@ import { QLDanhMucComponent } from './qldanh-muc/qldanh-muc.component';
 import { TtKKhachHangComponent } from './tt-kkhach-hang/tt-kkhach-hang.component';
 import { QlNhapHangComponent } from './ql-nhap-hang/ql-nhap-hang.component';
 import { QlBanHangComponent } from './ql-ban-hang/ql-ban-hang.component';
+import { EditHangHoaComponent } from './edit-hang-hoa/edit-hang-hoa.component';
+import { EditTTKhachHangComponent } from './edit-tt-khach-hang/edit-tt-khach-hang.component';
+import { EditDonHangComponent } from './edit-don-hang/edit-don-hang.component';
+import { EditCTDonHangComponent } from './edit-ct-don-hang/edit-ct-don-hang.component';
 import { logging } from 'protractor';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -61,13 +65,18 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 
 import { ModalComponent } from './_components';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgSwipeToDeleteModule } from 'ng-swipe-to-delete';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'QLDanhMuc', component: QLDanhMucComponent },
   { path: 'TTKhachHang', component: TtKKhachHangComponent },
   { path: 'QLNhapHang', component: QlNhapHangComponent },
-  { path: 'QLBanHang', component: QlBanHangComponent }
+  { path: 'QLBanHang', component: QlBanHangComponent },
+  { path: 'editHangHoa/:id', component: EditHangHoaComponent, pathMatch: 'full' },
+  { path: 'editTTKhachHang/:id', component: EditTTKhachHangComponent },
+  { path: 'editDonHang/:id', component: EditDonHangComponent },
+  { path: 'editCTDonHang/:id', component: EditCTDonHangComponent }
 ];
 
 export class MyHammerConfig extends HammerGestureConfig  {
@@ -85,7 +94,11 @@ export class MyHammerConfig extends HammerGestureConfig  {
     QlNhapHangComponent,
     QlBanHangComponent,
     LoginComponent,
-    ModalComponent
+    ModalComponent,
+    EditHangHoaComponent,
+    EditTTKhachHangComponent,
+    EditDonHangComponent,
+    EditCTDonHangComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -142,6 +155,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    NgSwipeToDeleteModule,
   ],
   providers: [{ 
     provide: HAMMER_GESTURE_CONFIG, 

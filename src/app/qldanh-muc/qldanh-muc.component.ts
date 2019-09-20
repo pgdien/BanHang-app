@@ -26,6 +26,93 @@ export class QLDanhMucComponent implements OnInit {
   displayedColumnLoaiDonhang: string[] = ['teN_LDH'];
   panelOpenState = false;
 
+  outgoingdata = [
+    {
+      title: 'Iron Man',
+      icon: 'pan_tool',
+      img: '/assets/ironman.jpg',
+      description: 'Iron Man is a fictional superhero.',
+      data: {
+        name: 'Tony Stark',
+        abilities: [
+          'Flying', 'Shooting', 'billionaire'
+        ]
+      }
+    },
+    {
+      title: 'Capton America',
+      icon: 'view_stream',
+      img: '/assets/captainamerica.jpg',
+      description: 'Captain America is the alter ego of Steve Rogers.',
+      data: {
+        name: 'Steve Rogers',
+        abilities: [
+          'Strong', 'Very Strong'
+        ]
+      }
+    },
+    {
+      title: 'Dr Strange',
+      icon: 'offline_bolt',
+      img: '/assets/drstange.jpg',
+      description: 'He is a master of Mystic Art',
+      data: {
+        name: 'Steven Strange',
+        abilities: [
+          'Mystic Art'
+        ]
+      }
+    },
+    {
+      title: 'Shaktiman',
+      icon: 'flash_on',
+      img: '/assets/shatiman.jpg',
+      description: 'Shaktimaan is an Indian fictional superhero.',
+      data: {
+        name: 'Pandit Gangadhar',
+        abilities: [
+          'Attractive male', 'Healing', 'Will power-based constructs', 'Flying'
+        ]
+      }
+    },
+    {
+      title: 'The Winter Soldier',
+      icon: 'trending_up',
+      img: '/assets/wintersoldier.jpg',
+      description: 'Barnes grew up as an Army brat. ',
+      data: {
+        name: 'James Buchanan "Bucky" Barnes',
+        abilities: [
+          'Hand to hand combat and Martial arts', 'Strong Arm'
+        ]
+      }
+    },
+    {
+      title: 'The Batman',
+      icon: 'attach_money',
+      img: '/assets/batman.jpg',
+      description: 'Batman does not possess any superpowers.',
+      data: {
+        name: 'Bruce wayne',
+        abilities: [
+          'Rich', 'Strong'
+        ]
+      }
+    },
+    {
+      title: 'The Superman',
+      icon: 'send',
+      img: '/assets/superman.jpg',
+      description: 'He is from krypton.',
+      data: {
+        name: 'Clark Kent',
+        abilities: [
+          'Attractive male', 'Healing', 'Will power-based constructs', 'Flying'
+        ]
+      }
+    }
+  ];
+
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private modalService: ModalService) { }
 
   host='https://banhang-api.herokuapp.com';
@@ -84,43 +171,43 @@ export class QLDanhMucComponent implements OnInit {
       console.log(this.listHangHoa);
     });
   }
-  createAdd(){
-    this.idHangHoa=null;
-    this.txtTenHH=null;
-    this.stt='Thêm';
-  }
-  createEdit(id){
-    this.stt='Sửa';
-    this.idHangHoa=id;
-    this.listHangHoa.forEach(childObj=> {
-      if(childObj.hanghoA_ID == id){
-        this.txtTenHH=childObj.teN_HH;
-      }
-    })
-  }
+  // createAdd(){
+  //   this.idHangHoa=null;
+  //   this.txtTenHH=null;
+  //   this.stt='Thêm';
+  // }
+  // createEdit(id){
+  //   this.stt='Sửa';
+  //   this.idHangHoa=id;
+  //   this.listHangHoa.forEach(childObj=> {
+  //     if(childObj.hanghoA_ID == id){
+  //       this.txtTenHH=childObj.teN_HH;
+  //     }
+  //   })
+  // }
   createDel(id, ten){
     this.idHangHoa=id;
     this.txtTenHH=ten;
   }
-  addHangHoa() {
-      this.httpClient.post(this.host + '/api/hanghoa', JSON.parse('{"ma_hh":"'+'1'+'",'+
-                                                            '"ten_hh":"'+this.txtTenHH+'"}'),  {responseType: 'text'}).subscribe((data) => {
-        // console.log(data);
-        this.kq= data;
-        this.openSnackBar();
-        if(data=='Thành công'){this.loadData();}
-    });
-  }
-  editHangHoa() {
-    this.httpClient.put(this.host + '/api/hanghoa/'+this.idHangHoa, JSON.parse('{"hanghoa_id":"'+this.idHangHoa+'",'+
-                                                                '"ten_hh":"'+this.txtTenHH+'"}'),  {responseType: 'text'}).subscribe(
-    data => {
-      // console.log(data);
-      this.kq= data;
-      this.openSnackBar();
-      if(data=='Thành công'){this.loadData();}
-    });
-  }
+  // addHangHoa() {
+  //     this.httpClient.post(this.host + '/api/hanghoa', JSON.parse('{"ma_hh":"'+'1'+'",'+
+  //                                                           '"ten_hh":"'+this.txtTenHH+'"}'),  {responseType: 'text'}).subscribe((data) => {
+  //       // console.log(data);
+  //       this.kq= data;
+  //       this.openSnackBar();
+  //       if(data=='Thành công'){this.loadData();}
+  //   });
+  // }
+  // editHangHoa() {
+  //   this.httpClient.put(this.host + '/api/hanghoa/'+this.idHangHoa, JSON.parse('{"hanghoa_id":"'+this.idHangHoa+'",'+
+  //                                                               '"ten_hh":"'+this.txtTenHH+'"}'),  {responseType: 'text'}).subscribe(
+  //   data => {
+  //     // console.log(data);
+  //     this.kq= data;
+  //     this.openSnackBar();
+  //     if(data=='Thành công'){this.loadData();}
+  //   });
+  // }
   delHangHoa(){
     this.httpClient.delete(this.host + '/api/hanghoa/'+this.idHangHoa,  {responseType: 'text'}).subscribe(
     data => {

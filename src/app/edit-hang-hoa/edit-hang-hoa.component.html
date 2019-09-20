@@ -1,0 +1,36 @@
+<div class="example-container" style="padding: 1em;">
+    <h1>Chi tiết hàng hóa!</h1>
+    <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Tên hàng hóa" [(ngModel)]="txtTenHH" [disabled]=view>
+    </mat-form-field>
+    <div class="example-container">
+        <button mat-stroked-button color="primary" *ngIf="id==0" (click)="addHangHoa()" style="width: 100%">
+            <i class="material-icons">add</i> Thêm
+        </button>
+    </div>
+    
+    <div class="example-container">
+        <button mat-stroked-button color="accent" *ngIf="id!=0 && view" (click)="createEdit()" style="width: 100%">
+            <i class="material-icons">edit</i> sửa
+        </button>
+    </div>
+    
+    <div class="example-container">
+        <button mat-stroked-button color="primary" *ngIf="edit && !view" (click)="editHangHoa()" style="width: 50%">
+            <i class="material-icons">edit</i> Sửa
+        </button>
+        <button mat-stroked-button color="warn" *ngIf="edit && !view" (click)="cancelEdit()" style="width: 50%">
+            <i class="material-icons">cancel</i> Hủy
+        </button>
+    </div>
+    
+    <div class="example-container" style="position: absolute; overflow: hidden; z-index: 100; left: 4%; bottom: 2%;">
+        <!-- <button mat-raised-button color="primary" (click)="openModal('modal-add-edit-HangHoa');createAdd()"> 
+            <i class="material-icons">add</i> Thêm
+        </button> -->
+        <button mat-raised-button color="primary" [routerLink]="['/QLDanhMuc']"> 
+            <i class="material-icons">arrow_back</i> Quay lại
+        </button>
+    </div>
+</div>

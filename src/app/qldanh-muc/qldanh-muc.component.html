@@ -1,7 +1,10 @@
 <mat-tab-group>
     <mat-tab label="Hàng hóa">
         <div class="example-container">
-            <button mat-raised-button color="primary" (click)="openModal('modal-add-edit-HangHoa');createAdd()"> 
+            <!-- <button mat-raised-button color="primary" (click)="openModal('modal-add-edit-HangHoa');createAdd()"> 
+                <i class="material-icons">add</i> Thêm
+            </button> -->
+            <button mat-raised-button color="primary" [routerLink]="['/editHangHoa',0]"> 
                 <i class="material-icons">add</i> Thêm
             </button>
         </div>
@@ -26,10 +29,11 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let item">
                     <div *ngIf="evtSwipe=='left' && idHangHoa==item.hanghoA_ID" class="evtSwipeButtonL" style="margin-top: -5%">
-                        <button mat-mini-fab color="primary" aria-label="Example icon-button with a heart icon">
-                            <i class="material-icons" (click)="openModal('modal-add-edit-HangHoa');createEdit(item.hanghoA_ID)">edit</i>
+                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
+                            <!-- <i class="material-icons" (click)="openModal('modal-add-edit-HangHoa');createEdit(item.hanghoA_ID)">edit</i> -->
+                            <i class="material-icons" [routerLink]="['/editHangHoa',item.hanghoA_ID]">info</i>
                         </button>
-                        <button mat-mini-fab color="warn" aria-label="Example icon-button with a heart icon">
+                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
                             <i class="material-icons" (click)="openModal('modal-del-HangHoa');createDel(item.hanghoA_ID,item.teN_HH)">delete_forever</i>
                         </button>
                     </div>

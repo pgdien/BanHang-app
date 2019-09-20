@@ -14,7 +14,7 @@
             {{item.ngaY_LAP | date: 'dd/MM/yyyy'}} 
         </mat-panel-description>
         <div *ngIf="evtSwipe=='left' && idDonhang==item.donhanG_ID" class="evtSwipeButtonL">
-            <button mat-mini-fab color="warn" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)">
+            <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)" style="box-shadow: none">
                 <i class="material-icons">delete</i>
             </button>
         </div>
