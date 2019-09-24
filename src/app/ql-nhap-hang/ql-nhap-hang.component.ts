@@ -22,6 +22,7 @@ export class QlNhapHangComponent implements OnInit {
   txtMaDonHang=null;
   stt='Thêm đơn hàng'
   evtSwipe=null;
+  indexExpanded=true;
 
   listKhachHang=null;
   idKhachHang=null;

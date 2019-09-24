@@ -33,20 +33,29 @@
                 <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
                     {{item.khachhang.sdt}}
                 </mat-list-item>
-                <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
+                <!-- <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
                     Chi tiết đơn hàng
+                    <div *ngIf="true" class="evtSwipeButtonL" style="margin-top: 1em">
+                        <button mat-icon-button aria-label="Example icon-button with a heart icon">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
                 </mat-list-item>
                 <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
-                    <button mat-icon-button aria-label="Example icon-button with a heart icon">
-                        <i class="material-icons">add</i>
+                    <div *ngIf="evtSwipe=='left' && idDonhang==item.donhanG_ID" class="evtSwipeButtonL">
+                        <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </div>
+                </mat-list-item> -->
+                <div style="    float: right; display: block; margin-top: -3em;">
+                    <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)" style="box-shadow: none">
+                        <i class="material-icons">info</i>
                     </button>
-                    <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon">
-                        <i class="material-icons">edit</i>
-                    </button>
-                    <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-                        <i class="material-icons">delete</i>
-                    </button>
-                </mat-list-item>
+                </div>
             </mat-list>
         </mat-expansion-panel>
     </mat-accordion>

@@ -66,6 +66,7 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { ModalComponent } from './_components';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgSwipeToDeleteModule } from 'ng-swipe-to-delete';
+import { CTDonHangComponent } from './ct-don-hang/ct-don-hang.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -98,7 +99,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     EditHangHoaComponent,
     EditTTKhachHangComponent,
     EditDonHangComponent,
-    EditCTDonHangComponent
+    EditCTDonHangComponent,
+    CTDonHangComponent
   ],
   imports: [
     RouterModule.forRoot(
