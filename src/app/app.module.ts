@@ -58,6 +58,7 @@ import { EditHangHoaComponent } from './edit-hang-hoa/edit-hang-hoa.component';
 import { EditTTKhachHangComponent } from './edit-tt-khach-hang/edit-tt-khach-hang.component';
 import { EditDonHangComponent } from './edit-don-hang/edit-don-hang.component';
 import { EditCTDonHangComponent } from './edit-ct-don-hang/edit-ct-don-hang.component';
+import { CTDonHangComponent } from './ct-don-hang/ct-don-hang.component';
 import { logging } from 'protractor';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -66,7 +67,6 @@ import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-br
 import { ModalComponent } from './_components';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgSwipeToDeleteModule } from 'ng-swipe-to-delete';
-import { CTDonHangComponent } from './ct-don-hang/ct-don-hang.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -77,7 +77,8 @@ const appRoutes: Routes = [
   { path: 'editHangHoa/:id', component: EditHangHoaComponent, pathMatch: 'full' },
   { path: 'editTTKhachHang/:id', component: EditTTKhachHangComponent },
   { path: 'editDonHang/:id', component: EditDonHangComponent },
-  { path: 'editCTDonHang/:id', component: EditCTDonHangComponent }
+  { path: 'editCTDonHang/:id', component: EditCTDonHangComponent },
+  { path: 'CTDonHang/:id', component: CTDonHangComponent }
 ];
 
 export class MyHammerConfig extends HammerGestureConfig  {

@@ -1,1 +1,37 @@
-<p>ct-don-hang works!</p>
+<mat-list *ngIf="DonHang">
+    <mat-list-item *ngIf="DonHang">{{DonHang.mA_DH}}</mat-list-item>
+    <mat-list-item *ngIf="DonHang">{{DonHang.ngaY_LAP | date: 'dd/MM/yyyy'}} </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngIf="DonHang.khachhang.teN_KH">{{DonHang.khachhang.teN_KH}}</mat-list-item>
+    <mat-list-item *ngIf="DonHang.khachhang.sdt">{{DonHang.khachhang.sdt}}</mat-list-item>
+    <mat-list-item *ngIf="DonHang.tien">{{DonHang.tien | number}} đ</mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list *ngIf="DonHang.lisT_CT_HD">
+        <div style="float: right; display: block; margin-right: 1em;">
+            <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" [routerLink]="['/editCTDonHang',0]" style="box-shadow: none">
+                <i class="material-icons">add</i>
+            </button>
+        </div>
+        <h3 mat-subheader>Chi tiết đơn hàng</h3>
+        <mat-list-item *ngFor="let item of DonHang.lisT_CT_HD" (swipe)="onSwipe($event, item.ctdH_ID)">
+            <mat-icon mat-list-icon>bookmark_border</mat-icon>
+            <h4 mat-line>{{item.teN_HH}}</h4>
+            <h4 mat-line>Đơn giá: {{item.dongia | number}} đ</h4>
+            <p mat-line>Số lượng: {{item.soluong}} </p>
+            <div *ngIf="evtSwipe=='left'" class="evtSwipeButtonL" style="margin: 0 auto">
+                <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
+                    <i class="material-icons" [routerLink]="['/editCTDonHang',item.ctdH_ID]">info</i>
+                </button>
+                <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
+                    <i class="material-icons" (click)="openModal('modal-del-CTDonHang');createDel()">delete_forever</i>
+                </button>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</mat-list>
+
+<jw-modal id="modal-del-CTDonHang">
+    <h1>Xóa {{txtMaDonHang}}?</h1>
+    <button mat-flat-button color="primary" (click)="closeModal('modal-del-DonHang')">Không đồng ý</button>
+    <button mat-flat-button color="warn" (click)="closeModal('modal-del-DonHang');delDonHang()" style="margin-left: 5em">Đồng ý</button>
+</jw-modal>

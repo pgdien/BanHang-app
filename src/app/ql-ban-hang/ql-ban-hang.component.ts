@@ -55,16 +55,16 @@ export class QlBanHangComponent implements OnInit {
         this.httpClient.get(this.host + '/api/khachhang/'+childObj.khachhanG_ID).subscribe((data1) => {
           childObj.khachhang = data1;
         });
-        this.httpClient.get(this.host + '/api/loai_donhang/'+childObj.loaidH_ID).subscribe((data2) => {
-          childObj.loaiDH = data2;
-        });
+        // this.httpClient.get(this.host + '/api/loai_donhang/'+childObj.loaidH_ID).subscribe((data2) => {
+        //   childObj.loaiDH = data2;
+        // });
         this.load=false;
      })
       console.log(this.listDonHang);
     });
-    this.httpClient.get(this.host + '/api/CT_DonHang').subscribe((data) => {
-      this.listCT_DonHang = data;
-    });
+    // this.httpClient.get(this.host + '/api/CT_DonHang').subscribe((data) => {
+    //   this.listCT_DonHang = data;
+    // });
   }
   
   createAddDonHang(){

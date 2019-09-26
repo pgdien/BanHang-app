@@ -33,6 +33,9 @@
                 <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null">
                     {{item.khachhang.sdt}}
                 </mat-list-item>
+                <mat-list-item role="listitem" *ngIf="item.khachhanG_ID!=0 && item.khachhang!=null" style="color: #ef5350; font-weight: bold">
+                    {{item.tien | number}} đ
+                </mat-list-item>
                 <!-- <mat-list-item role="listitem" *ngIf="item.loaiDH!=null">
                     Chi tiết đơn hàng
                     <div *ngIf="true" class="evtSwipeButtonL" style="margin-top: 1em">
@@ -52,29 +55,49 @@
                     </div>
                 </mat-list-item> -->
                 <div style="    float: right; display: block; margin-top: -3em;">
-                    <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" (click)="openModal('modal-del-DonHang');createDelDonHang(item.donhanG_ID,item.mA_DH)" style="box-shadow: none">
+                    <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" [routerLink]="['/CTDonHang',item.donhanG_ID]" style="box-shadow: none">
                         <i class="material-icons">info</i>
                     </button>
                 </div>
             </mat-list>
         </mat-expansion-panel>
+    
+        <!-- <div class="example-boundary">
+            <mat-expansion-panel class="example-box" cdkDragBoundary=".example-boundary" cdkDrag>
+            
+        </div> -->
+        
     </mat-accordion>
     
     <jw-modal id="modal-add-edit-DonHang">
-            <h1>{{stt}}!</h1>
-            <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
-            <mat-form-field>
-                <mat-label>Khách hàng</mat-label>
-                <select matNativeControl [(ngModel)]="idKhachHang">
-                    <option *ngFor="let item of listKhachHang" [(ngValue)]="item.khachhanG_ID">{{item.mA_KH}} - {{item.teN_KH}}</option>
-                </select>
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput placeholder="Ghi chú" [(ngModel)]="txtGhiChu_DonHang">
-            </mat-form-field>
-            <button mat-flat-button color="primary" *ngIf="stt=='Thêm đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');addDonHang()">{{stt}}</button>
-            <!-- <button mat-flat-button color="primary" *ngIf="stt=='Sửa đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');editHangHoa()">{{stt}}</button> -->
-        </jw-modal>
+        <h1>{{stt}}!</h1>
+        <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+        <!-- <mat-form-field>
+            <input
+                type="text"
+                placeholder="Pick one"
+                matInput
+                [formControl]="myControl"
+                [matAutocomplete]="auto"
+            />
+            
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+                {{ option }}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field> -->
+        <mat-form-field>
+            <select matNativeControl [(ngModel)]="idKhachHang">
+                <option *ngFor="let item of listKhachHang" [(ngValue)]="item.khachhanG_ID">{{item.mA_KH}} - {{item.teN_KH}}</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Ghi chú" [(ngModel)]="txtGhiChu_DonHang">
+        </mat-form-field>
+        <button mat-flat-button color="primary" *ngIf="stt=='Thêm đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');addDonHang()">{{stt}}</button>
+        <!-- <button mat-flat-button color="primary" *ngIf="stt=='Sửa đơn hàng'" (click)="closeModal('modal-add-edit-DonHang');editHangHoa()">{{stt}}</button> -->
+    </jw-modal>
     
     <jw-modal id="modal-del-DonHang">
         <h1>Xóa {{txtMaDonHang}}?</h1>
