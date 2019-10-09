@@ -99,6 +99,8 @@ body.jw-modal-open {
   width: 20%;
   float: right;
   visibility: hidden;
+  -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+  transition: width 2s;
 }
 .evtSwipeButtonL{
   visibility: visible !important;
@@ -106,5 +108,5 @@ body.jw-modal-open {
   overflow: hidden;
   z-index: 100;
   right: 4%;
-  margin-top: -3%;    
+  margin-top: -3%;
 }

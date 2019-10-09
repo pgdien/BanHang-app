@@ -8,7 +8,7 @@
     <mat-divider></mat-divider>
     <mat-list *ngIf="DonHang.lisT_CT_HD">
         <div style="float: right; display: block; margin-right: 1em;">
-            <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" [routerLink]="['/editCTDonHang',0]" style="box-shadow: none">
+            <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" [routerLink]="['/editCTDonHang',0,id]" style="box-shadow: none">
                 <i class="material-icons">add</i>
             </button>
         </div>
@@ -20,7 +20,7 @@
             <p mat-line>Số lượng: {{item.soluong}} </p>
             <div *ngIf="evtSwipe=='left'" class="evtSwipeButtonL" style="margin: 0 auto">
                 <button mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
-                    <i class="material-icons" [routerLink]="['/editCTDonHang',item.ctdH_ID]">info</i>
+                    <i class="material-icons" [routerLink]="['/editCTDonHang',item.ctdH_ID,id]">info</i>
                 </button>
                 <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon" style="box-shadow: none">
                     <i class="material-icons" (click)="openModal('modal-del-CTDonHang');createDel()">delete_forever</i>

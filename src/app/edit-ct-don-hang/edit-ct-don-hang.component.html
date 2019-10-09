@@ -1,1 +1,53 @@
-<p>edit-ct-don-hang works!</p>
+<div class="example-container" style="padding: 1em;">
+    <h1>Chi tiết đơn hàng!</h1>
+    <!-- <button (click)="closeModal('custom-modal-2');">Close</button> -->
+    <mat-form-field style="width: 100%">
+        <select matInput placeholder="Hàng hóa" matNativeControl [(ngModel)]="txtHH_id" [disabled]=view>
+            <option *ngFor="let item of list_hangHoa" [(ngValue)]="item.hanghoA_ID">{{item.mA_HH}} - {{item.teN_HH}}</option>
+        </select>
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Đơn Giá" (ngModelChange)="tinhTong()"  [(ngModel)]="txtDonGia" [disabled]=view type="number">
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Số lượng" (ngModelChange)="tinhTong()" [(ngModel)]="txtSoLuong" [disabled]=view type="number">
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Thành tiền" [(ngModel)]="txtTongTien" [disabled]=true type="number">
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Thực thu" [(ngModel)]="txtThucThu" [disabled]=view type="number">
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <input matInput placeholder="Cộng thêm" [(ngModel)]="txtCongThem" [disabled]=view type="number">
+    </mat-form-field>
+    <mat-form-field style="width: 100%">
+        <textarea matInput placeholder="Ghi chú" [(ngModel)]="txtGhichu" [disabled]=view></textarea>
+    </mat-form-field>
+    <div class="example-container">
+        <button mat-stroked-button color="primary" *ngIf="idCT==0" (click)="addTC_HangHoa()" style="width: 100%">
+            <i class="material-icons">add</i> Thêm
+        </button>
+    </div>
+    
+    <div class="example-container">
+        <button mat-stroked-button color="accent" *ngIf="idCT!=0 && view" (click)="createEdit()" style="width: 100%">
+            <i class="material-icons">edit</i> sửa
+        </button>
+    </div>
+    
+    <div class="example-container">
+        <button mat-stroked-button color="primary" *ngIf="edit && !view" (click)="editTC_HangHoa()" style="width: 50%">
+            <i class="material-icons">edit</i> Sửa
+        </button>
+        <button mat-stroked-button color="warn" *ngIf="edit && !view" (click)="cancelEdit()" style="width: 50%">
+            <i class="material-icons">cancel</i> Hủy
+        </button>
+    </div>
+    
+    <!-- <div class="example-container" style="position: absolute; overflow: hidden; z-index: 100; left: 4%; bottom: 2%;">
+        <button mat-raised-button color="primary" [routerLink]="['/CTDonHang',idDH]"> 
+            <i class="material-icons">arrow_back</i> Quay lại
+        </button>
+    </div> -->
+</div>

@@ -15,8 +15,8 @@ export class CTDonHangComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private route: ActivatedRoute, public router: Router, private modalService: ModalService) { }
 
-  host='https://banhang-api.herokuapp.com';
-  // host='http://localhost:50479';
+  // host='https://banhang-api.herokuapp.com';
+  host='http://localhost:50479';
   id: number;
   sub: any;
   DonHang=null;

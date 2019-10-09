@@ -77,7 +77,7 @@ const appRoutes: Routes = [
   { path: 'editHangHoa/:id', component: EditHangHoaComponent, pathMatch: 'full' },
   { path: 'editTTKhachHang/:id', component: EditTTKhachHangComponent },
   { path: 'editDonHang/:id', component: EditDonHangComponent },
-  { path: 'editCTDonHang/:id', component: EditCTDonHangComponent },
+  { path: 'editCTDonHang/:idCT/:idDH', component: EditCTDonHangComponent },
   { path: 'CTDonHang/:id', component: CTDonHangComponent }
 ];
 
