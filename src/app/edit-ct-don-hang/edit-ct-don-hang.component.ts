@@ -12,8 +12,8 @@ import { HttpClient } from '@angular/common/http';
 export class EditCTDonHangComponent implements OnInit {
 
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar, private route: ActivatedRoute, public router: Router, private modalService: ModalService) { }
-  // host='https://banhang-api.herokuapp.com';
-  host='https://localhost:44332';
+  host='https://banhang-api.herokuapp.com';
+  // host='https://localhost:44332';
   idCT: number;
   idDH: number;
   sub: any;
